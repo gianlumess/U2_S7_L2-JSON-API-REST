@@ -20,7 +20,24 @@ const deleteName = () => {
   document.querySelector("p").innerText = "";
 };
 
+const updateCounter = () => {
+  //se già presente il contatore lo ottengo, altrimenti assegno 0
+  let counter = parseInt(sessionStorage.getItem("counter")) || 0;
+
+  counter++;
+
+  sessionStorage.setItem("counter", counter);
+
+  document.getElementById("counter").innerText = counter;
+};
+
 window.addEventListener("DOMContentLoaded", () => {
+  //avvio il counter
+  updateCounter();
+  //imposto la frequenza di di refresh del counter
+  setInterval(updateCounter, 1000);
+
+  //contorlla se in memoria è salvato un valore nella key 'nome-utente'
   const nameStorage = localStorage.getItem("nome-utente");
 
   if (nameStorage) {
